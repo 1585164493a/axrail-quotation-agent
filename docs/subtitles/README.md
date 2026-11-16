@@ -33,3 +33,16 @@ python tools/make_subtitles.py
 - 文案在 `CUES`：`(朗读秒数, 英文, 中文, 后面留白秒数)`；
 - 段首锚点对齐 1:30 / 5:00 / 7:00，改文案后重跑即可；
 - 行宽自动 ≤46 字符，中文按 24 字换行。
+
+## 实际录制版本（9:09）
+
+视频 9 分 9 秒，与稿子逐句一致，所以只做了等比时间拉伸（scale 0.968）：
+
+| 文件 | 用途 |
+|---|---|
+| demo.retimed.srt | 中英双语，27 条，0:00–9:09 |
+| demo.en.9m09s.srt | 纯英文，可直接传给 YouTube / 播放器 |
+| demo.zh.9m09s.srt | 纯中文 |
+
+生成命令：python tools/retime_srt.py --duration 9:09
+

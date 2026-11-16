@@ -14,7 +14,7 @@ Hi Kelvin,
 Thanks for the exercise — it was a good one to build against. Here is my submission:
 
 **Repo:** https://github.com/1585164493a/axrail-quotation-agent
-**Video (8:xx):** <粘贴视频链接>
+**Video (9m09s):** <粘贴视频链接>
 
 In one line: an agent on AgentCore Runtime that takes a mixed-format RFQ — email body, Excel, PowerPoint, PDF, plus scans — normalises it into one structure, prices it with deterministic tools, and produces a quotation PDF, a reply draft and a review list. The model only reads text; prices, discounts, approval and confidence are code.
 
