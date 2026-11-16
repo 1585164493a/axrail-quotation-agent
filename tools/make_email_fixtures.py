@@ -234,8 +234,8 @@ def main() -> int:
     for name, rfq_no, customer, sender, subject, body in SCENARIOS:
         path = OUT / name
         path.write_bytes(build(rfq_no, customer, sender, subject, body).as_bytes())
-        print(f"  {name:<34} {len(body):>4} 字符")
-    print(f"\n共 {len(SCENARIOS)} 封 → {OUT}")
+        print(f"  {name:<34} {len(body):>4} chars")
+    print(f"\n{len(SCENARIOS)} emails -> {OUT}")
     return 0
 
 

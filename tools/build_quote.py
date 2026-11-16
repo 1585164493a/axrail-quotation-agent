@@ -27,17 +27,17 @@ def pick_email(conn) -> int:
         "ORDER BY stage_email_id DESC LIMIT 1"
     ).fetchone()
     if row is None:
-        raise SystemExit("库里还没有任何解析出来的块，先跑 tools/parse_attachments.py")
+        raise SystemExit("no parsed blocks yet - run tools/parse_attachments.py first")
     return int(row["stage_email_id"])
 
 
 def main(argv: list[str] | None = None) -> int:
     utf8_stdout()
-    ap = argparse.ArgumentParser(description="从 stage_block 生成报价")
+    ap = argparse.ArgumentParser(description="build a quote from stage_block")
     ap.add_argument("--db", default=str(ROOT / "data" / "email_extract.db"))
     ap.add_argument("--email", type=int, default=0, help="stage_email.id")
-    ap.add_argument("--payload", action="store_true", help="打印 mart_rfq 的 payload")
-    ap.add_argument("--out", default="", help="把报价单文本写到文件")
+    ap.add_argument("--payload", action="store_true", help="print the mart_rfq payload")
+    ap.add_argument("--out", default="", help="write the quote text to a file")
     args = ap.parse_args(argv)
 
     conn = connect(args.db)

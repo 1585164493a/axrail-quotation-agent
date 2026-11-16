@@ -25,10 +25,10 @@ from quotation_agent.store.db import connect, init_db  # noqa: E402
 
 def main(argv: list[str] | None = None) -> int:
     utf8_stdout()
-    ap = argparse.ArgumentParser(description="生成报价单 PDF / 回信草稿 / 复核清单")
+    ap = argparse.ArgumentParser(description="render quotation PDF, reply draft and review list")
     ap.add_argument("--db", default=str(ROOT / "data" / "email_extract.db"))
     ap.add_argument("--email", type=int, required=True, help="stage_email.id")
-    ap.add_argument("--out", default="", help="输出目录，默认 deliverables/<rfq_no>")
+    ap.add_argument("--out", default="", help="output directory, default deliverables/<rfq_no>")
     args = ap.parse_args(argv)
 
     conn = connect(args.db)
@@ -43,7 +43,7 @@ def main(argv: list[str] | None = None) -> int:
     (out / "review-list.md").write_text(render_review_list(quote), encoding="utf-8")
     (out / "quote.txt").write_text(render_text(quote), encoding="utf-8")
 
-    print(f"输出目录 {out}")
+    print(f"output directory: {out}")
     for item in ("pdf", "reply-email.txt", "review-list.md", "quote.txt"):
         path = pdf_path if item == "pdf" else out / item
         print(f"  {item:<16} {path.stat().st_size:>7} B")

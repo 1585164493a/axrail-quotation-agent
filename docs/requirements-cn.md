@@ -32,9 +32,9 @@
 | 14 | 说明生产区域 + 如何压低每份报价成本 | 确定性路径零模型调用、模板缓存、一次 Lambda | `docs/cost.md` | ✅ |
 | 15 | 必答题 1：哪些用了 AgentCore、哪些没用、为什么 | Runtime/Gateway/Memory 用；Identity/Code Interpreter/Browser/深度 Observability 不用 | `docs/interview-script.md` §4 | ✅ |
 | 16 | 必答题 2：与 LangGraph/LangChain 生产栈对比，留什么换什么 | 留显式状态机与纯函数工具；换托管、工具网关、会话存储 | `docs/interview-script.md` §5 | ✅ |
-| 17 | 5–10 分钟录屏，按建议分镜 | 脚本 + 58 条双语字幕，9:05，四段严格对齐题目的时间窗 | `docs/demo-script.md`、`docs/subtitles/` | ⏳ 未录 |
+| 17 | 5–10 分钟录屏，按建议分镜 | 脚本 + 58 条双语字幕，9:05，四段严格对齐题目的时间窗 | `docs/demo-script.final.md`、`docs/subtitles/` | ⏳ 未录 |
 | 18 | README：setup / architecture / how to run / 定价测试 / 已知限制 | 五项齐全，另有中文版与架构图 | `README.md`、`README.zh.md` | ✅ |
-| 19 | README 与旁白必须英文 | README 英文；旁白稿与字幕均为英文 | `README.md`、`demo-script.md` | ✅ |
+| 19 | README 与旁白必须英文 | README 英文；旁白稿与字幕均为英文 | `README.md`、`docs/transcript.md` | ✅ |
 | 20 | 必须能解释每一行 | 每行报价有 8 步规则链 + 出处；面试稿逐条对应 | `_trace`、`how?` 面板 | ✅ |
 
 ## 我做的假设（题目允许，需在视频里说明）

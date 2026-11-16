@@ -1,0 +1,303 @@
+{
+  "_comment": "Ready-to-use config for `create-gateway-target`. Replace lambdaArn with your own function ARN, and pass the credential config separately (see docs/aws-deployment.md).",
+  "mcp": {
+    "lambda": {
+      "lambdaArn": "arn:aws:lambda:ap-southeast-2:187133147869:function:quotation-agent-tools",
+      "toolSchema": {
+        "inlinePayload": [
+          {
+            "name": "price_line",
+            "description": "Price one machined part. Returns unit cost, list price, volume discount, unit price, line total and the rule trace.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "mass_kg": {
+                  "type": "number"
+                },
+                "part_no": {
+                  "type": "string"
+                },
+                "material": {
+                  "type": "string"
+                },
+                "qty": {
+                  "type": "integer"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "finish": {
+                  "type": "string"
+                },
+                "cycle_min": {
+                  "type": "number"
+                },
+                "tol_mm": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "part_no",
+                "material",
+                "qty",
+                "tol_mm",
+                "mass_kg",
+                "cycle_min"
+              ]
+            }
+          },
+          {
+            "name": "build_quote",
+            "description": "Price a whole RFQ from extracted blocks or from the raw email body text. Returns priced lines, held lines with reasons, conflicts, approval and the total.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "body_text": {
+                  "type": "string"
+                },
+                "blocks": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                },
+                "rfq_no": {
+                  "type": "string"
+                },
+                "customer": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "rfq_no"
+              ]
+            }
+          },
+          {
+            "name": "render_reply",
+            "description": "Render the English reply email and the plain-text quotation from a quote payload.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "quote": {
+                  "type": "object"
+                }
+              },
+              "required": [
+                "quote"
+              ]
+            }
+          },
+          {
+            "name": "render_quote_pdf",
+            "description": "Render the quotation PDF from a quote payload, store it in S3 and return a presigned URL valid for one hour. Set output to pdf.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "output": {
+                  "type": "string",
+                  "description": "set to pdf"
+                },
+                "quote": {
+                  "type": "object"
+                }
+              },
+              "required": [
+                "quote"
+              ]
+            }
+          },
+          {
+            "name": "list_emails",
+            "description": "List RFQ emails stored in S3 (subject, sender, size, modified) so a user can pick one to quote.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "prefix": {
+                  "type": "string"
+                },
+                "limit": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          {
+            "name": "quote_email",
+            "description": "Read one .eml from S3 and return a quotation. mode: body (email text only), attachments (xlsx/pptx/pdf only) or both (default).",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "mode": {
+                  "type": "string",
+                  "description": "body | attachments | both (default both)"
+                },
+                "rfq_no": {
+                  "type": "string"
+                },
+                "key": {
+                  "type": "string"
+                },
+                "customer": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          },
+          {
+            "name": "preview_attachments",
+            "description": "Parse every attachment of an S3 email and return the extracted rows with their source locator (e.g. Part list!A5). Set preview to true.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "preview": {
+                  "type": "boolean"
+                },
+                "max_rows": {
+                  "type": "integer"
+                },
+                "key": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          },
+          {
+            "name": "read_email",
+            "description": "Read one email from S3: subject, sender, recipients, date, RFQ ids, body text and the attachment list. Set read to true.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "read": {
+                  "type": "boolean"
+                },
+                "key": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          },
+          {
+            "name": "reprice_quote",
+            "description": "Recompute a quote at a given discount: unit prices, total, cost, profit, margin and approval impact. discount_rate is 0..0.5.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "quote": {
+                  "type": "object"
+                },
+                "discount_rate": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "quote",
+                "discount_rate"
+              ]
+            }
+          },
+          {
+            "name": "submit_approval",
+            "description": "Route a quote to the sales manager: stores a pending approval record in S3. Set submit to true.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "quote": {
+                  "type": "object"
+                },
+                "requested_by": {
+                  "type": "string"
+                },
+                "submit": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "quote"
+              ]
+            }
+          },
+          {
+            "name": "list_approvals",
+            "description": "List approval records (pending/approved/rejected), newest first. Set list_approvals to true.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "limit": {
+                  "type": "integer"
+                },
+                "list_approvals": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          {
+            "name": "decide_approval",
+            "description": "Record a manager decision (approved/rejected) for an approval record.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "decision": {
+                  "type": "string"
+                },
+                "s3_key": {
+                  "type": "string"
+                },
+                "decided_by": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "s3_key",
+                "decision"
+              ]
+            }
+          },
+          {
+            "name": "render_review_pdf",
+            "description": "Render the internal review-list PDF (what was flagged, why, approval status, per-line source and rule trace). Set output to review.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "output": {
+                  "type": "string"
+                },
+                "quote": {
+                  "type": "object"
+                },
+                "approval_status": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "quote"
+              ]
+            }
+          },
+          {
+            "name": "get_prices",
+            "description": "Return the current price list: material rates per kg, machine rates per minute, finishes, setup, margin, discount tiers and approval thresholds. Set prices to true.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "prices": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

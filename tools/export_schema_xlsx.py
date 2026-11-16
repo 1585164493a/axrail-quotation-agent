@@ -115,7 +115,7 @@ def main(argv: list[str]) -> int:
     db = Path(argv[2]) if len(argv) > 2 else DEFAULT_DB
 
     if not db.exists():
-        print(f"数据库不存在：{db}（先跑 python tools/init_db.py）")
+        print(f"database not found: {db} (run python tools/init_db.py first)")
         return 1
 
     conn = sqlite3.connect(db)
@@ -189,7 +189,7 @@ def main(argv: list[str]) -> int:
     cols = conn.execute("SELECT COUNT(*) FROM schema_meta").fetchone()[0]
     conn.close()
     print(f"saved: {out}")
-    print(f"表 {len(TABLES)} 个 / 字段 {cols} 条 / 枚举 {len(ENUMS)} 条 / 索引 {len(INDEXES)} 个")
+    print(f"tables {len(TABLES)} / columns {cols} / enums {len(ENUMS)} / indexes {len(INDEXES)}")
     return 0
 
 

@@ -44,7 +44,7 @@ def reset(conn: sqlite3.Connection) -> None:
 
 
 def dump(conn: sqlite3.Connection) -> None:
-    print("\n== 各层行数 ==")
+    print("\n== row counts per layer ==")
     for table, count in summary(conn).items():
         print(f"  {table:<18} {count}")
 
@@ -73,7 +73,7 @@ def dump(conn: sqlite3.Connection) -> None:
         print(f"      customer={row['customer_name'] or '-'} ({row['customer_level'] or '-'}) rfq={row['rfq_ids']}")
         print(f"      warnings={row['warnings']}")
 
-    print("\n== stage_block（按邮件汇总）==")
+    print("\n== stage_block (grouped by email) ==")
     for row in conn.execute(
         "SELECT stage_email_id, COUNT(*) c FROM stage_block GROUP BY stage_email_id ORDER BY stage_email_id"
     ):
@@ -82,12 +82,12 @@ def dump(conn: sqlite3.Connection) -> None:
 
 def main(argv: list[str] | None = None) -> int:
     utf8_stdout()
-    ap = argparse.ArgumentParser(description="初始化 / 填充 email_extract.db")
+    ap = argparse.ArgumentParser(description="create or fill email_extract.db")
     ap.add_argument("--db", default=str(ROOT / "data" / "email_extract.db"))
-    ap.add_argument("--store", nargs="*", default=[], help="要入库的 .eml")
+    ap.add_argument("--store", nargs="*", default=[], help=".eml files to ingest")
     ap.add_argument("--staging", default=str(ROOT / "artifacts"))
-    ap.add_argument("--reparse", type=int, default=0, help="按 raw_email.id 重新解析")
-    ap.add_argument("--rebuild", action="store_true", help="清空所有表后重建")
+    ap.add_argument("--reparse", type=int, default=0, help="re-parse raw_email by id")
+    ap.add_argument("--rebuild", action="store_true", help="drop every table and rebuild")
     ap.add_argument("--dump", action="store_true")
     args = ap.parse_args(argv)
 
@@ -95,7 +95,7 @@ def main(argv: list[str] | None = None) -> int:
     if args.rebuild:
         reset(conn)
     init_db(conn)
-    print(f"schema ok: {args.db}（版本 {SCHEMA_VERSION}）")
+    print(f"schema ok: {args.db} (version {SCHEMA_VERSION})")
 
     staging = Path(args.staging)
     staging.mkdir(parents=True, exist_ok=True)

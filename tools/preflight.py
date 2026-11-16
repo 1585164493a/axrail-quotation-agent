@@ -150,8 +150,8 @@ failed = [name for name, ok, _ in results if not ok]
 print()
 print(f"{len(results) - len(failed)}/{len(results)} checks passed")
 if failed:
-    print("需要处理：")
+    print("needs fixing:")
     for name in failed:
         print("  -", name)
 else:
-    print("全部通过，可以开录。")
+    print("all checks passed - ready to record.")

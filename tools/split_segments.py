@@ -70,7 +70,7 @@ def main() -> None:
         path = OUT / filename
         path.write_text("\n".join(lines).rstrip() + "\n", encoding="utf-8")
         words = sum(len(english.split()) for _s, english, _c in picked)
-        print(f"{filename}: {len(picked)} 句 · {words} 词 · ~{words / 140:.1f} min")
+        print(f"{filename}: {len(picked)} sentences, {words} words, ~{words / 140:.1f} min")
 
 
 if __name__ == "__main__":

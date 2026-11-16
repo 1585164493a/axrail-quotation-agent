@@ -301,7 +301,7 @@ def main(argv: list[str] | None = None) -> int:
         out = Path(args.out)
         out.parent.mkdir(parents=True, exist_ok=True)
         out.write_text(payload, encoding="utf-8")
-        print(f"envelope 已写入 {out}")
+        print(f"envelope written to {out}")
     else:
         print(payload)
     return 0

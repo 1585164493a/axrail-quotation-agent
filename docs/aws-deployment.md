@@ -75,9 +75,10 @@ aws bedrock-agentcore-control create-gateway \
   --role-arn "arn:aws:iam::<account>:role/quotation-agent-gateway-role"
 
 # then a target that points at the Lambda function
+# the 14-tool schema is checked in as docs/gateway-tools.json — replace lambdaArn, then:
 aws bedrock-agentcore-control create-gateway-target \
   --gateway-identifier <gateway-id> --name tools \
-  --target-configuration '{"mcp":{"lambda":{"lambdaArn":"<function-arn>","toolSchema":{"inlinePayload":[...]}}}}' \
+  --target-configuration file://docs/gateway-tools.json \
   --credential-provider-configurations '[{"credentialProviderType":"GATEWAY_IAM_ROLE"}]'
 ```
 

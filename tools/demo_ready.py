@@ -77,7 +77,7 @@ def split_screen(segment: int | None, script_kind: str = "notepad") -> None:
     width, height = screen_size()
     browser = find_window("edge") or find_window("chrome")
     if not browser:
-        print("  ! 没找到浏览器窗口，先手动打开演示页面再跑一次")
+        print("  ! no browser window found - open the demo page first, then re-run")
         return
     move_window(browser, 0, 0, int(width * 0.7), height)
     print(f"  browser -> 0,0 {int(width * 0.7)}x{height}")
@@ -87,7 +87,7 @@ def split_screen(segment: int | None, script_kind: str = "notepad") -> None:
 
     script = SEGMENTS / SEGMENT_FILES.get(segment, "")
     if not script.exists():
-        print(f"  ! 找不到稿子 {script.name}")
+        print(f"  ! script not found: {script.name}")
         return
 
     if script_kind == "edge":
@@ -103,7 +103,7 @@ def split_screen(segment: int | None, script_kind: str = "notepad") -> None:
         move_window(notepad, int(width * 0.7), 0, int(width * 0.3), height)
         print(f"  notepad -> {int(width * 0.7)},0 {int(width * 0.3)}x{height}  ({script.name})")
     else:
-        print(f"  稿子已打开：{script}")
+        print(f"  script opened: {script}")
 
     # 最后把演示窗口提到前面：右侧稿子仍然可见，但焦点在浏览器上
     user32.ShowWindow(browser, 9)      # SW_RESTORE
@@ -188,17 +188,17 @@ def main() -> int:
         print("5) split screen")
         split_screen(args.seg, args.script)
     else:
-        print("5) layout: 不分屏（稿子在手机上）")
+        print("5) layout: no split (script is on the phone)")
 
-    print("\n录制清单")
-    print("  OBS：窗口采集 → 选 Edge；画布 1920x1080；MKV；Ctrl+Shift+R 开始")
-    print("  右侧记事本不会被录进去（只采集 Edge 窗口）")
-    print("  手机提词页：docs/prompter-phone.html（发到微信文件传输助手，手机浏览器打开）")
-    print("  按 Alt+Tab 切到 Edge —— Windows 不允许脚本抢焦点")
-    print("  OBS 里把来源缩放滤镜设成 Lanczos，放大后文字更清晰")
-    print("  关微信/QQ，开专注助手；每段开头留 2 秒静音")
+    print("\nrecording checklist")
+    print("  OBS: window capture -> Edge; canvas 1920x1080; MKV; Ctrl+Shift+R to record")
+    print("  the notepad on the right is not captured (window capture only)")
+    print("  phone prompter: docs/prompter-phone.html (send to the phone, open in a browser)")
+    print("  press Alt+Tab to focus Edge - Windows blocks script-driven focus changes")
+    print("  set the OBS source scale filter to Lanczos for sharper upscaling")
+    print("  close WeChat/QQ, enable Focus assist; leave 2 s of silence at each segment start")
     if not ok:
-        print("\n!! 凭证无效，先 aws login")
+        print("\n!! credentials invalid - run aws login first")
     return 0
 
 

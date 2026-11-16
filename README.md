@@ -242,5 +242,4 @@ region-specific assumptions beyond configuration.
 | [`docs/aws-deployment.md`](docs/aws-deployment.md) | resources, invoke command, teardown |
 | [`docs/cost.md`](docs/cost.md) | per-quote cost, levers, fixed-cost traps |
 | [`docs/walkthrough.md`](docs/walkthrough.md) | real input/output of every stage |
-| [`docs/demo-script.md`](docs/demo-script.md) | recording plan with timings |
 | [`docs/db-schema.xlsx`](docs/db-schema.xlsx) | data dictionary (10 tables, 93 fields, source per field) |

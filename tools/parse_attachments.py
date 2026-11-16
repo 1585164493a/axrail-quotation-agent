@@ -29,7 +29,7 @@ def dump(conn) -> None:
             "SELECT block_type, locator, value, row_json FROM stage_block "
             "WHERE stage_attachment_id = ? ORDER BY ordinal", (att["id"],)
         ).fetchall()
-        print(f"\n[{att['filename']}]  {len(blocks)} 块")
+        print(f"\n[{att['filename']}]  {len(blocks)} blocks")
         for b in blocks:
             body = b["value"] if b["value"] is not None else b["row_json"]
             print(f"  {b['block_type']:<9} {b['locator']:<28} {(body or '')[:110]}")
@@ -37,9 +37,9 @@ def dump(conn) -> None:
 
 def main(argv: list[str] | None = None) -> int:
     utf8_stdout()
-    ap = argparse.ArgumentParser(description="解析附件并写入 stage_block")
+    ap = argparse.ArgumentParser(description="parse attachments into stage_block")
     ap.add_argument("--db", default=str(ROOT / "data" / "email_extract.db"))
-    ap.add_argument("--all", action="store_true", help="重新解析全部附件")
+    ap.add_argument("--all", action="store_true", help="re-parse every attachment")
     ap.add_argument("--dump", action="store_true")
     args = ap.parse_args(argv)
 
@@ -48,12 +48,12 @@ def main(argv: list[str] | None = None) -> int:
 
     results = parse_attachments(conn, ROOT / "artifacts" / "_parse", reparse_all=args.all)
     if not results:
-        print("没有待解析的附件（加 --all 可重跑）")
+        print("no attachments to parse (add --all to re-run)")
     for info in results:
         flag = "ok  " if info["ok"] else "FAIL"
         warn = ", ".join(w.split(":")[0] for w in info["warnings"]) or "—"
-        print(f"  {flag} {info['file']:<30} 块={info['blocks']:<3} 告警={warn}"
-              + (f"  错误={info['error'][:60]}" if info["error"] else ""))
+        print(f"  {flag} {info['file']:<30} blocks={info['blocks']:<3} warnings={warn}"
+              + (f"  error={info['error'][:60]}" if info["error"] else ""))
 
     if args.dump:
         dump(conn)
