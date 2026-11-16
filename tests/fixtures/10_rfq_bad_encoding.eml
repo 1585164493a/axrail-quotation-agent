@@ -1,0 +1,10 @@
+Subject: RFQ-2026-118 bad encoding
+From: Alex Tan <buyer@example-customer.test>
+To: sales@example-cnc-shop.test
+Date: Mon, 02 Nov 2026 09:14:00 +0800
+Message-ID: <fx10@example-customer.test>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
+
+Çë±¨¼Û£ºCVR-310 ±Ã¸Ç 800 ¼þ£¬¹«²î ¡À0.05 mm¡£Ð»Ð»¡£³ÂÎ°£¬Example Customer Sdn Bhd

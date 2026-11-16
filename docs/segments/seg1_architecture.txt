@@ -1,0 +1,20 @@
+段 1 · 架构 + 两个必答题   (0:00 开始)
+============================================================
+
+[01] For the brief, I built one path from a mixed-format RFQ to a delivered quote.
+     中文：针对题目，我做了一条从多格式询价到报价交付的完整链路。
+
+[02] Five layers: email into S3, Runtime runs agent dot py, Gateway exposes fourteen tools, the tools do the work, deliverables back to S3.
+     中文：五层：邮件进 S3，Runtime 跑agent.py，Gateway暴露十四个工具，工具干活，交付物回 S3。
+
+[03] Inside the tools, eight steps from ingest to render — and the model only reads text. Everything else is code.
+     中文：工具里八步，从接入到交付；模型只读文字，其余全是代码。
+
+[04] Question one: I use three. Runtime hosts the agent, Gateway exposes the fourteen tools with IAM auth, and Memory keeps state between calls.
+     中文：必答题一：我用三样。Runtime 托管agent，Gateway 带 IAM鉴权暴露十四个工具，Memory保存调用之间的状态。
+
+[05] Four I skip: Identity — one caller; Code Interpreter — prices stay pure; Browser — nothing to browse; deep tracing — logs are enough.
+     中文：另外四项不用：Identity（单调用方）、CodeInterpreter（价格要纯函数）、Browser（没网页）、深度追踪（日志够用）。
+
+[06] Question two: from my LangGraph stack I keep three things — visible flow, plain-function tools, and a human sign-off.
+     中文：必答题二：LangGraph里我留三样——流程可见、工具是函数、有人点头。

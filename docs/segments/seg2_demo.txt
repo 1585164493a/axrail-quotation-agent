@@ -1,0 +1,35 @@
+段 2 · 界面演示五步   (1:33 开始)
+============================================================
+
+[01] I replace hosting, my own MCP server and the Mongo checkpointer with Runtime, Gateway and Memory — and no framework, since the flow is straight.
+     中文：托管、自建 MCP、Mongocheckpointer 换成Runtime、Gateway、Memory；链路是直的，不用框架。
+
+[02] Let me run the sample RFQ. The front end is a small local UI, in tools ui py.
+     中文：演示样例 RFQ。前端是个本地小界面，代码在tools/ui.py。
+
+[03] I pick the email, tick what to read — body only first — and generate.
+     中文：选邮件，勾选要读的内容，先只勾正文，然后生成。
+
+[04] Here are the lines and the suggested price. Click how for the pricing logic and the sources.
+     中文：这是提取出的行和建议价。点 how看计算逻辑和出处。
+
+[05] Click why for the confidence — the score is rules, the sentence is the model.
+     中文：点 why看置信度——分数由规则算出，解释那句话是模型写的。
+
+[06] Scroll to discount: sliding recomputes margin and quote. The email's requested discount goes to Needs sign-off, as a reference.
+     中文：往下是折扣：拖动即重算毛利率和报价；邮件里的期望折扣放进Needs sign-off 作参考。
+
+[07] Sliding also regenerates the PDF and the reply. Above policy, it cannot be approved directly — it routes to approval.
+     中文：拖动同时重新生成 PDF和回信；超过政策线不能直接批，走审批。
+
+[08] Five lines, but not all can be quoted: a held section explains each, and a conflicts box for multi-source disagreement.
+     中文：五行里不是每行都能报价：held栏逐行解释，Conflicts 栏处理多源冲突。
+
+[09] Generate at this discount produces the review list, the reply and the quotation PDF.
+     中文：点这个折扣生成，得到复核清单、回信和报价单PDF。
+
+[10] At the bottom, attachment previews and the original file; the top navigation has the other pages.
+     中文：最下面是附件预览和原件；顶部导航是其它页面。
+
+[11] Now the problems — decided, asked, assumed.
+     中文：现在讲问题：它决定的、问人的、我假设的。

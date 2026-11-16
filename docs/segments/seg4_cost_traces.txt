@@ -1,0 +1,11 @@
+段 4 · 成本 / 追踪 / 改进   (7:00 开始)
+============================================================
+
+[01] Cost: this page reads CloudWatch live. One quote is about one fen — and the biggest item is Memory, not the model.
+     中文：成本：这页实时读CloudWatch。一份约一分钱，最大项是Memory，不是模型。
+
+[02] Traces: left is every quote this session; right, the tool calls — which tool, how long, what went in and out.
+     中文：追踪：左边是本次会话每次报价；右边是工具调用——哪个工具、多久、输入输出。
+
+[03] Below, the rule chain per line. Three improvements: chart semantics, approval email, and learned confidence weights.
+     中文：下面是每行规则链。三个改进：图表语义、审批邮件、可信度权重用数据拟合。

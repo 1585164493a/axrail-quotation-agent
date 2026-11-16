@@ -1,0 +1,19 @@
+__pycache__/
+*.pyc
+.venv/
+.testtmp/
+artifacts/
+.pytest_cache/
+deliverables/
+data/*.db
+.uvcache/
+
+# build outputs
+build/
+agent_runtime/deployment_package/
+agent_runtime/deployment_package.zip
+
+# local secrets / state
+.env
+.env.*
+*.local

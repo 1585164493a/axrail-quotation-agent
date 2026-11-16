@@ -1,0 +1,143 @@
+1
+00:00:00,000 --> 00:00:12,900
+For the brief, I built one path from a
+mixed-format RFQ to a delivered quote.
+
+2
+00:00:12,900 --> 00:00:32,600
+Five layers: email into S3, Runtime runs agent
+dot py, Gateway exposes fourteen tools, the
+tools do the work, deliverables back to S3.
+
+3
+00:00:32,600 --> 00:00:49,700
+Inside the tools, eight steps from ingest to
+render — and the model only reads text.
+Everything else is code.
+
+4
+00:00:49,700 --> 00:01:09,400
+Question one: I use three. Runtime hosts the
+agent, Gateway exposes the fourteen tools with
+IAM auth, and Memory keeps state between
+calls.
+
+5
+00:01:09,400 --> 00:01:30,000
+Four I skip: Identity — one caller; Code
+Interpreter — prices stay pure; Browser —
+nothing to browse; deep tracing — logs are
+enough.
+
+6
+00:01:30,000 --> 00:01:46,300
+Question two: from my LangGraph stack I keep
+three things — visible flow, plain-function
+tools, and a human sign-off.
+
+7
+00:01:46,300 --> 00:02:07,700
+I replace hosting, my own MCP server and the
+Mongo checkpointer with Runtime, Gateway and
+Memory — and no framework, since the flow is
+straight.
+
+8
+00:02:07,700 --> 00:02:23,100
+Let me run the sample RFQ. The front end is a
+small local UI, in tools ui py.
+
+9
+00:02:23,100 --> 00:02:36,000
+I pick the email, tick what to read — body
+only first — and generate.
+
+10
+00:02:36,000 --> 00:02:50,600
+Here are the lines and the suggested price.
+Click how for the pricing logic and the
+sources.
+
+11
+00:02:50,600 --> 00:03:03,500
+Click why for the confidence — the score is
+rules, the sentence is the model.
+
+12
+00:03:03,500 --> 00:03:19,800
+Scroll to discount: sliding recomputes margin
+and quote. The email's requested discount goes
+to Needs sign-off, as a reference.
+
+13
+00:03:19,800 --> 00:03:36,900
+Sliding also regenerates the PDF and the
+reply. Above policy, it cannot be approved
+directly — it routes to approval.
+
+14
+00:03:36,900 --> 00:03:54,000
+Five lines, but not all can be quoted: a held
+section explains each, and a conflicts box for
+multi-source disagreement.
+
+15
+00:03:54,000 --> 00:04:06,000
+Generate at this discount produces the review
+list, the reply and the quotation PDF.
+
+16
+00:04:06,000 --> 00:04:19,700
+At the bottom, attachment previews and the
+original file; the top navigation has the
+other pages.
+
+17
+00:04:59,700 --> 00:05:05,700
+Now the problems — decided, asked, assumed.
+
+18
+00:05:05,700 --> 00:05:22,000
+Decided: quantity from the most authoritative
+document, discount from the tier, unpriceable
+lines held, policy breaches routed to
+approval.
+
+19
+00:05:22,000 --> 00:05:38,300
+Asked: the spacer's quantity, the titanium
+price and its tight tolerance, the
+drawing-versus-sheet conflict, and the fifteen
+percent discount.
+
+20
+00:05:38,300 --> 00:06:07,400
+Assumed — and the table shows it: twenty-five
+percent is a margin, not a markup; tiers apply
+per line; fifty thousand needs a manager;
+eight percent caps the discount; a missing
+value is held.
+
+21
+00:07:00,400 --> 00:07:19,300
+Cost: this page reads CloudWatch live. One
+quote is about one fen — and the biggest item
+is Memory, not the model.
+
+22
+00:07:19,300 --> 00:07:37,300
+Traces: left is every quote this session;
+right, the tool calls — which tool, how long,
+what went in and out.
+
+23
+00:07:37,300 --> 00:07:51,000
+Below, the rule chain per line. Three
+improvements: chart semantics, approval email,
+and learned confidence weights.
+
+24
+00:07:51,000 --> 00:08:05,600
+So: rules handle the documents, a person
+handles the rest, and I wrote down everything
+in between.

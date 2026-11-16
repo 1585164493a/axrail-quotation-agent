@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Prompter</title>
+<style>
+  :root { --en: 26px; --zh: 18px; }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body { margin:0; padding:0; background:#0d1219; color:#eef4fa;
+                font-family:-apple-system,"Segoe UI",Roboto,sans-serif; }
+  #doc { padding: 7vh 18px 46vh; }
+  .beat { margin-bottom: 24px; }
+  .sec { font-size: 11px; letter-spacing:.12em; text-transform:uppercase; color:#4d6478; margin-bottom:6px; }
+  .en { font-size: var(--en); line-height: 1.5; margin: 0 0 8px; font-weight: 600; }
+  .zh { font-size: var(--zh); line-height: 1.5; margin: 0; color:#8ba1b7; }
+  .hint { font-size: 0.62em; color:#c9a35a; font-weight: 400; letter-spacing:.02em; }
+  body.no-hint .hint { display: none; }
+  @media (orientation: landscape) {
+    :root { --en: 30px; --zh: 19px; }
+    #doc { padding: 5vh 5vw 40vh; }
+    .beat { margin-bottom: 18px; }
+  }
+  @media (orientation: landscape) and (max-height: 430px) {
+    :root { --en: 25px; --zh: 16px; }
+  }
+  #bar { position: fixed; left:0; right:0; bottom:0; display:flex; gap:7px; align-items:center;
+          padding: 9px 12px calc(9px + env(safe-area-inset-bottom)); background:rgba(13,18,25,.96);
+          border-top:1px solid #1b2836; }
+  #bar button { background:#1b2836; color:#cfe0f0; border:1px solid #2b3b4d; border-radius:10px;
+                 padding:9px 10px; font-size:13.5px; }
+  #bar button:active { background:#26384b; }
+  #play { flex: 0 0 76px; font-size:14.5px; }
+  #speed { flex:1; }
+  #hint { position:fixed; top:8px; left:0; right:0; text-align:center; font-size:11px;
+           color:#4d6478; pointer-events:none; }
+</style></head><body>
+<div id="hint">▶ 开始自动滚动 · 按住屏幕暂停 · ⛶ 横屏</div>
+<div id="doc">
+<section class="beat"><div class="sec">Opening</div><p class="zh">实测语速约 70 词/分钟，所以全稿压到 ~480 词，念完约 7 分钟，留出操作时间。 **英文是念出来的**，中文是同义对照。时间窗仍对齐：1:30 / 5:00 / 7:00。</p></section>
+<section class="beat"><div class="sec">0:00–1:30 · 架构 + 两个必答题</div><p class="en">For the brief, I built one path from a mixed-format<span class="hint"> (MIKST-FOR-mat)</span> RFQ to a delivered quote.</p><p class="zh">针对题目，我做了一条从多格式询价到报价交付的完整链路。</p></section>
+<section class="beat"><div class="sec">0:00–1:30 · 架构 + 两个必答题</div><p class="en">Five layers: email into S3, Runtime runs agent dot py<span class="hint"> (P-Y 两个字母)</span>, Gateway exposes fourteen tools, the tools do the work, deliverables<span class="hint"> (di-LIV-er-uh-bulz)</span> back to S3.</p><p class="zh">五层：邮件进 S3，Runtime 跑 agent.py，Gateway 暴露十四个工具，工具干活，交付物回 S3。</p></section>
+<section class="beat"><div class="sec">0:00–1:30 · 架构 + 两个必答题</div><p class="en">Inside the tools, eight steps from ingest<span class="hint"> (in-JEST)</span> to render — and the model only reads text. Everything<span class="hint"> (EV-ri-thing)</span> else is code.</p><p class="zh">工具里八步，从接入到交付；模型只读文字，其余全是代码。</p></section>
+<section class="beat"><div class="sec">0:00–1:30 · 架构 + 两个必答题</div><p class="en">Question one: I use three. Runtime hosts the agent, Gateway exposes the fourteen tools with IAM auth, and Memory keeps state between calls.</p><p class="zh">必答题一：我用三样。Runtime 托管 agent，Gateway 带 IAM 鉴权暴露十四个工具，Memory 保存调用之间的状态。</p></section>
+<section class="beat"><div class="sec">0:00–1:30 · 架构 + 两个必答题</div><p class="en">Four I skip: Identity — one caller; Code Interpreter<span class="hint"> (in-TUH-pri-ter)</span> — prices stay pure; Browser — nothing to browse; deep tracing — logs are enough.</p><p class="zh">另外四项不用：Identity（单调用方）、Code Interpreter（价格要纯函数）、Browser（没网页）、深度追踪（日志够用）。</p></section>
+<section class="beat"><div class="sec">0:00–1:30 · 架构 + 两个必答题</div><p class="en">Question two: from my LangGraph stack I keep three things — visible flow, plain-function tools, and a human sign-off.</p><p class="zh">必答题二：LangGraph 里我留三样——流程可见、工具是函数、有人点头。</p></section>
+<section class="beat"><div class="sec">0:00–1:30 · 架构 + 两个必答题</div><p class="en">I replace hosting, my own MCP server and the Mongo checkpointer<span class="hint"> (CHECK-point-er)</span> with Runtime, Gateway and Memory — and no framework, since the flow is straight.</p><p class="zh">托管、自建 MCP、Mongo checkpointer 换成 Runtime、Gateway、Memory；链路是直的，不用框架。</p></section>
+<section class="beat"><div class="sec">1:30–5:00 · 界面演示</div><p class="en">Let me run the sample RFQ. The front end is a small local UI, in tools ui py<span class="hint"> (P-Y 两个字母)</span>.</p><p class="zh">演示样例 RFQ。前端是个本地小界面，代码在 tools/ui.py。</p></section>
+<section class="beat"><div class="sec">1:30–5:00 · 界面演示</div><p class="en">I pick the email, tick what to read — body only first — and generate.</p><p class="zh">选邮件，勾选要读的内容，先只勾正文，然后生成。</p></section>
+<section class="beat"><div class="sec">1:30–5:00 · 界面演示</div><p class="en">Here are the lines and the suggested price. Click how for the pricing logic and the sources.</p><p class="zh">这是提取出的行和建议价。点 how 看计算逻辑和出处。</p></section>
+<section class="beat"><div class="sec">1:30–5:00 · 界面演示</div><p class="en">Click why for the confidence<span class="hint"> (KON-fi-dens)</span> — the score is rules, the sentence is the model.</p><p class="zh">点 why 看置信度——分数由规则算出，解释那句话是模型写的。</p></section>
+<section class="beat"><div class="sec">1:30–5:00 · 界面演示</div><p class="en">Scroll to discount: sliding recomputes<span class="hint"> (ree-kum-PYOOts)</span> margin<span class="hint"> (MAA-jin)</span> and quote. The email's requested discount goes to Needs sign-off, as a reference.</p><p class="zh">往下是折扣：拖动即重算毛利率和报价；邮件里的期望折扣放进 Needs sign-off 作参考。</p></section>
+<section class="beat"><div class="sec">1:30–5:00 · 界面演示</div><p class="en">Sliding also regenerates<span class="hint"> (ree-JEN-er-eits)</span> the PDF and the reply. Above policy, it cannot be approved directly — it routes to approval.</p><p class="zh">拖动同时重新生成 PDF 和回信；超过政策线不能直接批，走审批。</p></section>
+<section class="beat"><div class="sec">1:30–5:00 · 界面演示</div><p class="en">Five lines, but not all can be quoted: a held section explains each, and a conflicts box for multi-source<span class="hint"> (MUL-ti-SORS)</span> disagreement<span class="hint"> (dis-uh-GREE-ment)</span>.</p><p class="zh">五行里不是每行都能报价：held 栏逐行解释，Conflicts 栏处理多源冲突。</p></section>
+<section class="beat"><div class="sec">1:30–5:00 · 界面演示</div><p class="en">Generate at this discount produces the review list, the reply and the quotation<span class="hint"> (阔-TEI-神)</span> PDF.</p><p class="zh">点这个折扣生成，得到复核清单、回信和报价单 PDF。</p></section>
+<section class="beat"><div class="sec">1:30–5:00 · 界面演示</div><p class="en">At the bottom, attachment<span class="hint"> (uh-TACH-ment)</span> previews and the original file; the top navigation<span class="hint"> (na-vi-GEI-shun)</span> has the other pages.</p><p class="zh">最下面是附件预览和原件；顶部导航是其它页面。</p></section>
+<section class="beat"><div class="sec">5:00–7:00 · 问题：决定 / 问人 / 假设</div><p class="en">Now the problems — decided, asked, assumed.</p><p class="zh">现在讲问题：它决定的、问人的、我假设的。</p></section>
+<section class="beat"><div class="sec">5:00–7:00 · 问题：决定 / 问人 / 假设</div><p class="en">Decided: quantity from the most authoritative<span class="hint"> (aw-THO-ri-tuh-tiv)</span> document, discount from the tier, unpriceable lines held, policy breaches routed to approval.</p><p class="zh">它决定的：数量取最权威文件，折扣按档位，算不出的挂起，越线自动进审批。</p></section>
+<section class="beat"><div class="sec">5:00–7:00 · 问题：决定 / 问人 / 假设</div><p class="en">Asked: the spacer's quantity, the titanium<span class="hint"> (ti-TEI-nee-um)</span> price and its tight tolerance<span class="hint"> (TOL-er-ens)</span>, the drawing-versus-sheet conflict, and the fifteen percent discount.</p><p class="zh">问人的：垫片数量、钛合金价格与超紧公差、图纸与表格的冲突、15% 折扣。</p></section>
+<section class="beat"><div class="sec">5:00–7:00 · 问题：决定 / 问人 / 假设</div><p class="en">Assumed — and the table shows it: twenty-five<span class="hint"> (TWEN-ti-faiv)</span> percent is a margin<span class="hint"> (MAA-jin)</span>, not a markup; tiers apply per line; fifty thousand needs a manager; eight percent caps the discount; a missing value is held.</p><p class="zh">假设都在表里：25% 是毛利率不是加价率；档位按行；五万要经理签字；8% 是折扣上限；缺失值挂起。</p></section>
+<section class="beat"><div class="sec">7:00–8:30 · 成本 / 追踪 / 改进</div><p class="en">Cost: this page reads CloudWatch live. One quote is about one fen — and the biggest item is Memory, not the model.</p><p class="zh">成本：这页实时读 CloudWatch。一份约一分钱，最大项是 Memory，不是模型。</p></section>
+<section class="beat"><div class="sec">7:00–8:30 · 成本 / 追踪 / 改进</div><p class="en">Traces: left is every quote this session; right, the tool calls — which tool, how long, what went in and out.</p><p class="zh">追踪：左边是本次会话每次报价；右边是工具调用——哪个工具、多久、输入输出。</p></section>
+<section class="beat"><div class="sec">7:00–8:30 · 成本 / 追踪 / 改进</div><p class="en">Below, the rule chain per line. Three improvements: chart semantics, approval email, and learned confidence<span class="hint"> (KON-fi-dens)</span> weights.</p><p class="zh">下面是每行规则链。三个改进：图表语义、审批邮件、可信度权重用数据拟合。</p></section>
+<section class="beat"><div class="sec">收尾</div><p class="en">So: rules handle the documents, a person handles the rest, and I wrote down everything<span class="hint"> (EV-ri-thing)</span> in between.</p><p class="zh">一句话：文件里有的规则处理，没有的交给人，中间的全部写成假设。</p></section>
+</div>
+<div id="bar">
+  <button id="play">▶ 开始</button>
+  <button id="slower">慢</button>
+  <input id="speed" type="range" min="6" max="60" value="20" step="1">
+  <button id="faster">快</button>
+  <button id="pron">读音</button>
+  <button id="full">⛶</button>
+  <button id="top">↑</button>
+</div>
+<script>
+let playing = false, speed = 20, last = 0, pos = 0;
+const playBtn = document.getElementById('play');
+const slider = document.getElementById('speed');
+
+function tick(now) {
+  if (!last) last = now;
+  const dt = (now - last) / 1000;
+  last = now;
+  if (playing) {
+    pos += speed * dt;
+    window.scrollTo(0, pos);
+    if (pos + window.innerHeight >= document.body.scrollHeight - 4) {
+      playing = false;
+      playBtn.textContent = '▶ 开始';
+    }
+  }
+  requestAnimationFrame(tick);
+}
+requestAnimationFrame(tick);
+
+function toggle() {
+  playing = !playing;
+  last = 0;
+  pos = window.scrollY;
+  playBtn.textContent = playing ? '⏸ 暂停' : '▶ 开始';
+}
+playBtn.onclick = toggle;
+document.getElementById('slower').onclick = () => { speed = Math.max(6, speed - 4); slider.value = speed; };
+document.getElementById('faster').onclick = () => { speed = Math.min(60, speed + 4); slider.value = speed; };
+document.getElementById('top').onclick = () => { pos = 0; window.scrollTo(0, 0); };
+slider.oninput = () => { speed = Number(slider.value); };
+document.getElementById('pron').onclick = (event) => {
+  document.body.classList.toggle('no-hint');
+  event.target.textContent = document.body.classList.contains('no-hint') ? '读音' : '隐读音';
+};
+document.getElementById('full').onclick = async () => {
+  try {
+    if (!document.fullscreenElement) {
+      await document.documentElement.requestFullscreen();
+    }
+    if (screen.orientation && screen.orientation.lock) {
+      await screen.orientation.lock('landscape');
+    }
+  } catch (err) {
+    document.getElementById('hint').textContent = '请关闭手机的旋转锁定，再点 ⛶';
+  }
+};
+window.addEventListener('scroll', () => { if (!playing) pos = window.scrollY; });
+document.getElementById('doc').addEventListener('touchstart', () => {
+  if (playing) { playing = false; playBtn.textContent = '▶ 继续'; }
+});
+</script>
+</body></html>

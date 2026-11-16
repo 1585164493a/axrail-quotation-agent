@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Teleprompter</title>
+<style>
+  :root { --size: 44px; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#0d1219; color:#eef4fa; font-family:"Segoe UI",Arial,sans-serif;
+          display:flex; flex-direction:column; height:100vh; overflow:hidden; }
+  #top { display:flex; align-items:center; gap:14px; padding:12px 22px; background:#131c26;
+          font-size:13px; color:#8ea4bb; border-bottom:1px solid #1e2c3b; }
+  #top b { color:#eef4fa; }
+  #top button { background:#1c2a39; color:#cfe0f0; border:1px solid #2c3d50; border-radius:6px;
+                 padding:5px 11px; font-size:12.5px; cursor:pointer; }
+  #stage { flex:1; display:flex; flex-direction:column; justify-content:center; padding:0 9vw; }
+  #section { font-size:15px; letter-spacing:.1em; text-transform:uppercase; color:#5f88b5; margin-bottom:22px; }
+  #beat { font-size:var(--size); line-height:1.42; font-weight:500; }
+  #next { margin-top:34px; font-size:20px; color:#4a5f75; line-height:1.45; }
+  #bottom { padding:10px 22px; background:#131c26; color:#6d8299; font-size:12.5px;
+             display:flex; justify-content:space-between; border-top:1px solid #1e2c3b; }
+  #bar { height:3px; background:#1c2a39; }
+  #barfill { height:3px; background:#2f6bff; width:0; transition:width .15s; }
+  body.compact #stage { padding:0; }
+  body.compact { }
+  body.compact #top { display:none; }
+  body.compact #bar { display:none; }
+  body.compact #stage {
+    position:fixed; left:0; right:0; bottom:0; height:118px;
+    background:rgba(10,16,24,.82); backdrop-filter:blur(3px);
+    padding:10px 26px; justify-content:center; border-top:1px solid #24374b;
+  }
+  body.compact #section { display:none; }
+  body.compact #beat { font-size:26px; line-height:1.3; color:#eaf2fb; }
+  body.compact #next { display:none; }
+  body.compact #bottom {
+    position:fixed; right:14px; bottom:122px; padding:0; background:none; border:none;
+    font-size:11.5px; color:#8ea4bb;
+  }
+  body.compact #bottom #words { display:none; }
+  @media print {
+    body { background:#fff; color:#111; height:auto; overflow:visible; }
+    #top, #bottom, #next, #bar { display:none; }
+    #stage { padding:0; display:block; }
+    #beat { font-size:15pt; line-height:1.5; page-break-inside:avoid; margin-bottom:18pt; }
+    #section { color:#666; font-size:10pt; }
+  }
+</style></head><body class="compact">
+<div id="top">
+  <b>Teleprompter</b>
+  <span id="counter">1 / 1</span>
+  <button id="prev">← Back (↑)</button>
+  <button id="nextBtn">Next (space)</button>
+  <button id="smaller">A−</button>
+  <button id="bigger">A+</button>
+  <span id="hint">space = next · ↑ = back · ←→ = font</span>
+</div>
+<div id="bar"><div id="barfill"></div></div>
+<div id="stage">
+  <div id="section"></div>
+  <div id="beat"></div>
+  <div id="next"></div>
+</div>
+<div id="bottom"><span id="left"></span><span id="words"></span></div>
+<script>
+const BEATS = [
+{"s": "0:00–1:30 · 架构 + 两个必答题", "t": "For the brief, I built one path from a mixed-format RFQ to a delivered quote."},
+{"s": "0:00–1:30 · 架构 + 两个必答题", "t": "Five layers: email into S3, Runtime runs agent dot py, Gateway exposes fourteen tools, the tools do the work, deliverables back to S3."},
+{"s": "0:00–1:30 · 架构 + 两个必答题", "t": "Inside the tools, eight steps from ingest to render — and the model only reads text. Everything else is code. Question one: I use three."},
+{"s": "0:00–1:30 · 架构 + 两个必答题", "t": "Runtime hosts the agent, Gateway exposes the fourteen tools with IAM auth, and Memory keeps state between calls."},
+{"s": "0:00–1:30 · 架构 + 两个必答题", "t": "Four I skip: Identity — one caller; Code Interpreter — prices stay pure; Browser — nothing to browse; deep tracing — logs are enough."},
+{"s": "0:00–1:30 · 架构 + 两个必答题", "t": "Question two: from my LangGraph stack I keep three things — visible flow, plain-function tools, and a human sign-off."},
+{"s": "0:00–1:30 · 架构 + 两个必答题", "t": "I replace hosting, my own MCP server and the Mongo checkpointer with Runtime, Gateway and Memory — and no framework, since the flow is straight."},
+{"s": "1:30–5:00 · 界面演示", "t": "Let me run the sample RFQ. The front end is a small local UI, in tools ui py."},
+{"s": "1:30–5:00 · 界面演示", "t": "I pick the email, tick what to read — body only first — and generate. Here are the lines and the suggested price."},
+{"s": "1:30–5:00 · 界面演示", "t": "Click how for the pricing logic and the sources. Click why for the confidence — the score is rules, the sentence is the model."},
+{"s": "1:30–5:00 · 界面演示", "t": "Scroll to discount: sliding recomputes margin and quote. The email's requested discount goes to Needs sign-off, as a reference."},
+{"s": "1:30–5:00 · 界面演示", "t": "Sliding also regenerates the PDF and the reply. Above policy, it cannot be approved directly — it routes to approval."},
+{"s": "1:30–5:00 · 界面演示", "t": "Five lines, but not all can be quoted: a held section explains each, and a conflicts box for multi-source disagreement."},
+{"s": "1:30–5:00 · 界面演示", "t": "Generate at this discount produces the review list, the reply and the quotation PDF."},
+{"s": "1:30–5:00 · 界面演示", "t": "At the bottom, attachment previews and the original file; the top navigation has the other pages."},
+{"s": "5:00–7:00 · 问题：决定 / 问人 / 假设", "t": "Now the problems — decided, asked, assumed. Decided: quantity from the most authoritative document, discount from the tier, unpriceable lines held, policy breaches routed to approval."},
+{"s": "5:00–7:00 · 问题：决定 / 问人 / 假设", "t": "Asked: the spacer's quantity, the titanium price and its tight tolerance, the drawing-versus-sheet conflict, and the fifteen percent discount."},
+{"s": "5:00–7:00 · 问题：决定 / 问人 / 假设", "t": "Assumed: thirty days validity; twenty-five percent is a margin, so price is cost over zero point seven five; tier per line; fifty thousand signs; eight percent cap; missing values held."},
+{"s": "7:00–8:30 · 成本 / 追踪 / 改进", "t": "Cost: this page reads CloudWatch live. One quote is about one fen — and the biggest item is Memory, not the model."},
+{"s": "7:00–8:30 · 成本 / 追踪 / 改进", "t": "Traces: left is every quote this session; right, the tool calls — which tool, how long, what went in and out."},
+{"s": "7:00–8:30 · 成本 / 追踪 / 改进", "t": "Below, the rule chain per line. Three improvements: chart semantics, approval email, and learned confidence weights."},
+{"s": "收尾", "t": "So: rules handle the documents, a person handles the rest, and I wrote down everything in between."}
+];
+let index = 0;
+
+function render() {
+  const beat = BEATS[index] || {s: '', t: ''};
+  document.getElementById('section').textContent = beat.s;
+  document.getElementById('beat').textContent = beat.t;
+  document.getElementById('next').textContent = (BEATS[index + 1] || {t: ''}).t;
+  document.getElementById('counter').textContent = (index + 1) + ' / ' + BEATS.length;
+  document.getElementById('barfill').style.width = ((index + 1) / BEATS.length * 100).toFixed(1) + '%';
+  const remaining = BEATS.slice(index).reduce((sum, b) => sum + b.t.split(' ').length, 0);
+  document.getElementById('left').textContent = 'words left: ' + remaining + '  (~' + (remaining / 140).toFixed(1) + ' min)';
+  document.getElementById('words').textContent = beat.t.split(' ').length + ' words';
+}
+function go(delta) {
+  index = Math.min(BEATS.length - 1, Math.max(0, index + delta));
+  render();
+}
+function setSize(delta) {
+  const current = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--size'));
+  document.documentElement.style.setProperty('--size', Math.min(72, Math.max(24, current + delta)) + 'px');
+}
+document.getElementById('prev').onclick = () => go(-1);
+document.getElementById('nextBtn').onclick = () => go(1);
+document.getElementById('smaller').onclick = () => setSize(-4);
+document.getElementById('bigger').onclick = () => setSize(4);
+window.addEventListener('keydown', (event) => {
+  if (event.code === 'Space' || event.code === 'ArrowRight' && event.shiftKey) { event.preventDefault(); go(1); }
+  if (event.code === 'ArrowUp') { event.preventDefault(); go(-1); }
+  if (event.code === 'ArrowDown') { event.preventDefault(); go(1); }
+  if (event.code === 'ArrowLeft') { event.preventDefault(); setSize(-4); }
+  if (event.code === 'ArrowRight') { event.preventDefault(); setSize(4); }
+  if (event.code === 'Home') { event.preventDefault(); index = 0; render(); }
+});
+if (location.hash.indexOf('compact') >= 0 || location.search.indexOf('compact') >= 0) {
+  document.body.classList.add('compact');
+}
+render();
+</script>
+</body></html>
