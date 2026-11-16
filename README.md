@@ -1,6 +1,5 @@
 # AI Quotation Agent — Axrail take-home
 
-> 中文版（设计说明，给作者自己看）: [README.zh.md](README.zh.md)
 
 
 An agent that takes a customer RFQ (email body plus Excel / PowerPoint / PDF attachments),
