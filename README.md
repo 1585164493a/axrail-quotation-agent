@@ -24,6 +24,29 @@ in both — `tests/test_same_quote.py` asserts it.
 
 ---
 
+## What it looks like
+
+![Workbench](docs/screenshots/01-workbench.png)
+
+*The workbench. Four files ticked, one quote at 74,684 MYR, the CVR-310 line flagged at 0.30
+confidence because two documents disagree, and the held lines showing the cost components that
+are already known.*
+
+![How and why](docs/screenshots/02-how-why.png)
+
+*`how?` opens the derivation as one formula plus a field-by-field provenance table (`RULES` /
+`MODEL` / `OCR`); `why?` scores each field and prints the model's advisory note on the conflict.*
+
+![Cost per quote](docs/screenshots/03-cost.png)
+
+*`/cost` reads CloudWatch for this account and prices a quote item by item. Memory events are the
+largest component; the model call only happens on a fallback.*
+
+![Traces](docs/screenshots/04-traces.png)
+
+*`/traces` lists every quote from the session, the Gateway tools it called (input and output per
+call), the price rule chain per line, and the raw runtime log.*
+
 ## Pipeline
 
 ```
