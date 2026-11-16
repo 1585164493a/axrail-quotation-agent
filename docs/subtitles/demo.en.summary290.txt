@@ -1,1 +1,0 @@
-Built an AgentCore agent that turns mixed-format RFQs into priced quotes: the model only reads text, code prices, gaps are held, big quotes route to approval, and traces show which tool ran with what input and output

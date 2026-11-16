@@ -138,7 +138,7 @@ if up:
         record("trace data", False, str(exc)[:80])
 
 # 8. 录制素材
-for rel in ("docs/architecture.png", "docs/subtitles/demo.bilingual.srt", "docs/prompter-phone.html",
+for rel in ("docs/architecture.png", "docs/transcript.md", "docs/prompter-phone.html",
             "docs/demo-script.final.md", "docs/segments/seg1_architecture.txt",
             "docs/segments/seg2_demo.txt", "docs/segments/seg3_problems.txt",
             "docs/segments/seg4_cost_traces.txt", "docs/segments/seg5_closing.txt"):

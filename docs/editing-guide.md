@@ -29,7 +29,7 @@
 
 ### 4. 挂字幕
 
-1. 顶部「**文本** → **智能字幕** → **导入字幕**」→ 选 `docs/subtitles/demo.en.srt`；
+1. 顶部「**文本** → **智能字幕** → **识别字幕**」，语言选 English（字幕在剪辑软件里生成，仓库里不放 SRT）；
 2. 字幕会自动铺到时间轴上——**但它按原时间轴排的，需要整体对齐**：
    - 先把它拖到你实际开口的时间点；
    - 每段起点的字幕往前/后挪，直到对上；
@@ -67,8 +67,7 @@ file 'D:/Videos/2026-11-16 19-20-03.mp4'
 # 2. 无损拼接（要求所有片段编码参数一致，OBS 同一设置录的通常满足）
 ffmpeg -f concat -safe 0 -i D:\pythoncode\concat.txt -c copy D:\pythoncode\demo.mp4
 
-# 3. 想顺便把字幕烧进去（硬字幕）
-ffmpeg -i demo.mp4 -vf "subtitles=docs/subtitles/demo.en.srt" -c:a copy demo_subbed.mp4
+# 3. 字幕在剪辑软件里加（仓库不提供 SRT 文件）
 ```
 
 > `-c copy` 是直接复制流、不重编码，几秒完成；如果报错，去掉 `-c copy` 让它重编码。

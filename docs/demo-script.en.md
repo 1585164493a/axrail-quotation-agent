@@ -1,7 +1,7 @@
 # Demo narration — English (full script)
 
 > Record this. 0:00–9:06. Screen cues in square brackets. Pauses marked ⏸.
-> Chinese twin: `demo-script.zh.md`. As-recorded text: `transcript.md`. Subtitles: `subtitles/`.
+> Chinese twin: `demo-script.zh.md`. As-recorded text: `transcript.md`.
 
 ---
 

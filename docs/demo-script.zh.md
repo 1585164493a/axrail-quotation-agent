@@ -2,7 +2,7 @@
 
 > 这一份是**中文完整版**，内容与英文版逐段对应（`demo-script.en.md`）。
 > 录屏时念英文；中文用来对意思、检查有没有讲漏。
-> 实际录制文稿：`transcript.md`；字幕：`subtitles/`。
+> 实际录制文稿：`transcript.md`。
 
 ---
 
