@@ -17,3 +17,6 @@ agent_runtime/deployment_package.zip
 .env
 .env.*
 *.local
+
+# local video (delivered via Drive, not committed)
+docs/video/
