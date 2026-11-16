@@ -148,10 +148,28 @@
 > 追踪：左边是本次会话每次报价；右边是工具调用——哪个工具、多久、输入输出。
 
 **EN**
-> Below, the rule chain per line. Three improvements: chart semantics, approval email, and learned confidence weights.
+> Below, the rule chain per line. Three things I would improve — each one is a gap, not a bug.
 
 **中文**
-> 下面是每行规则链。三个改进：图表语义、审批邮件、可信度权重用数据拟合。
+> 下面是每行规则链。三件要改进的事——每件都是缺口，不是 bug。
+
+**EN**
+> One: charts. OCR reads the labels on a drawing, but not the values plotted inside a bar or a curve — so a quantity that only exists in the chart is still invisible to me.
+
+**中文**
+> 一，图表。OCR 能读图纸上的标签，读不到柱状图或曲线里画出的数值——所以只存在于图里的数量，我现在看不到。
+
+**EN**
+> Two: approvals. They land in a queue and someone can approve them in the page, but nobody gets an email — that needs SES, and it is the first thing I would wire next.
+
+**中文**
+> 二，审批。会进队列、页面上能批准，但没人收到邮件——需要 SES，是我接下来第一个要接的。
+
+**EN**
+> Three: the confidence weights — ninety, seventy, sixty, forty-five — are my judgement, not learned; they should be fitted to labelled quotes.
+
+**中文**
+> 三，可信度权重——90/70/60/45——是我的判断不是学来的；应该用标注过的报价去拟合。
 
 
 ## 收尾

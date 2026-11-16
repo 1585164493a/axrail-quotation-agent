@@ -131,13 +131,33 @@ right, the tool calls — which tool, how long,
 what went in and out.
 
 23
-00:07:37,300 --> 00:07:51,000
-Below, the rule chain per line. Three
-improvements: chart semantics, approval email,
-and learned confidence weights.
+00:07:37,300 --> 00:07:54,400
+Below, the rule chain per line. Three things I
+would improve — each one is a gap, not a bug.
 
 24
-00:07:51,000 --> 00:08:05,600
+00:07:54,400 --> 00:08:24,400
+One: charts. OCR reads the labels on a
+drawing, but not the values plotted inside a
+bar or a curve — so a quantity that only
+exists in the chart is still invisible to me.
+
+25
+00:08:24,400 --> 00:08:53,500
+Two: approvals. They land in a queue and
+someone can approve them in the page, but
+nobody gets an email — that needs SES, and it
+is the first thing I would wire next.
+
+26
+00:08:53,500 --> 00:09:12,400
+Three: the confidence weights — ninety,
+seventy, sixty, forty-five — are my judgement,
+not learned; they should be fitted to labelled
+quotes.
+
+27
+00:09:12,400 --> 00:09:27,000
 So: rules handle the documents, a person
 handles the rest, and I wrote down everything
 in between.

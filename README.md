@@ -73,6 +73,9 @@ export LLM_API_KEY=...        # or LLM_KEY_PARAM=/quotation-agent/deepseek-api-k
 ```
 
 Nothing above is needed to run the deterministic pipeline or the tests — they are offline.
+The commands below use `uv run`, so they work without activating the virtualenv.
+If you prefer activating it, `.venv\Scripts\activate` (Windows) or `source .venv/bin/activate`
+and then plain `python` works too.
 To keep the local pipeline fully offline (no model fallback attempts), set
 `LLM_EXTRACTION=0` before running the CLI tools.
 
@@ -80,13 +83,13 @@ To keep the local pipeline fully offline (no model fallback attempts), set
 
 ```bash
 # 1. ingest an email and parse its attachments into SQLite
-python tools/init_db.py --rebuild --store tests/fixtures/02_rfq_full_attachments.eml
+uv run python tools/init_db.py --rebuild --store tests/fixtures/02_rfq_full_attachments.eml
 
 # 2. price it
-python tools/build_quote.py --email 1
+uv run python tools/build_quote.py --email 1
 
 # 3. write the deliverables (quotation PDF, review list, reply email, text)
-python tools/deliver.py --email 1
+uv run python tools/deliver.py --email 1
 ```
 
 `deliverables/<rfq_no>/` then contains `quote.pdf`, `review-list.md`, `reply-email.txt`
@@ -95,7 +98,7 @@ and `quote.txt`.
 ## Run the web UI
 
 ```bash
-python tools/ui.py            # → http://127.0.0.1:8765
+uv run python tools/ui.py     # → http://127.0.0.1:8765
 ```
 
 Four pages:
@@ -107,9 +110,10 @@ Four pages:
 | `/approvals` | approval queue with status, reasons, flagged lines; approve or reject |
 | `/prices` | the live price list and rules, read from the pricing code itself |
 
-The UI is a thin local shell: it signs requests with your AWS credentials and calls the
-deployed runtime, so it needs `aws login` (or any profile with the right permissions). The
-deterministic pipeline above works without AWS.
+The UI is a thin local shell: it signs requests with your AWS credentials and calls a
+deployed runtime. It needs two things — valid credentials (`aws login`) **and** a runtime
+of your own; set `RUNTIME_ARN` to it (see `docs/aws-deployment.md` §1.8). Without a
+deployed runtime the CLI above still works completely offline.
 
 ## Deploy to AWS
 
@@ -142,7 +146,7 @@ aws bedrock-agentcore invoke-agent-runtime \
 ## Tests
 
 ```bash
-python -m unittest discover -s tests        # 178 tests, ~5 s, no network, no AWS
+uv run python -m unittest discover -s tests   # 178 tests, ~5 s, no network, no AWS
 ```
 
 The pricing tool is covered directly — the brief's worked example, the volume tiers, and the

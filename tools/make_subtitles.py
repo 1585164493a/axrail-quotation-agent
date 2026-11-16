@@ -42,8 +42,11 @@ CUES: list[tuple[float, str, str, float]] = [
     (29.1, "Assumed — and the table shows it: twenty-five percent is a margin, not a markup; tiers apply per line; fifty thousand needs a manager; eight percent caps the discount; a missing value is held.", "假设都在表里：25% 是毛利率不是加价率；档位按行；五万要经理签字；8% 是折扣上限；缺失值挂起。", 53),
     (18.9, "Cost: this page reads CloudWatch live. One quote is about one fen — and the biggest item is Memory, not the model.", "成本：这页实时读 CloudWatch。一份约一分钱，最大项是 Memory，不是模型。", 0),
     (18, "Traces: left is every quote this session; right, the tool calls — which tool, how long, what went in and out.", "追踪：左边是本次会话每次报价；右边是工具调用——哪个工具、多久、输入输出。", 0),
-    (13.7, "Below, the rule chain per line. Three improvements: chart semantics, approval email, and learned confidence weights.", "下面是每行规则链。三个改进：图表语义、审批邮件、可信度权重用数据拟合。", 0),
-    (14.6, "So: rules handle the documents, a person handles the rest, and I wrote down everything in between.", "一句话：文件里有的规则处理，没有的交给人，中间的全部写成假设。", 54),
+    (17.1, "Below, the rule chain per line. Three things I would improve — each one is a gap, not a bug.", "下面是每行规则链。三件要改进的事——每件都是缺口，不是 bug。", 0),
+    (30, "One: charts. OCR reads the labels on a drawing, but not the values plotted inside a bar or a curve — so a quantity that only exists in the chart is still invisible to me.", "一，图表。OCR 能读图纸上的标签，读不到柱状图或曲线里画出的数值——所以只存在于图里的数量，我现在看不到。", 0),
+    (29.1, "Two: approvals. They land in a queue and someone can approve them in the page, but nobody gets an email — that needs SES, and it is the first thing I would wire next.", "二，审批。会进队列、页面上能批准，但没人收到邮件——需要 SES，是我接下来第一个要接的。", 0),
+    (18.9, "Three: the confidence weights — ninety, seventy, sixty, forty-five — are my judgement, not learned; they should be fitted to labelled quotes.", "三，可信度权重——90/70/60/45——是我的判断不是学来的；应该用标注过的报价去拟合。", 0),
+    (14.6, "So: rules handle the documents, a person handles the rest, and I wrote down everything in between.", "一句话：文件里有的规则处理，没有的交给人，中间的全部写成假设。", 3),
 ]
 
 
