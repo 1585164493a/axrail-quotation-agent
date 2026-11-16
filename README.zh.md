@@ -159,7 +159,7 @@ src/quotation_agent/
 agent_runtime/agent.py     Runtime 入口（只编排）
 tools/                     CLI · 网页界面 · 打包 · 部署 · 造 fixture
 tests/                     174 个测试
-docs/                      架构图 · AWS 部署 · 成本 · 演示脚本 · 面试稿 · 数据字典
+docs/                      架构图 · AWS 部署 · 成本 · 走查 · 演示脚本 · 数据字典
 ```
 
 ---
@@ -223,8 +223,8 @@ python tools/deploy_runtime.py                # 打包 arm64  → S3 → 打新�
 |---|---|
 | `README.md` | English（交付用） |
 | `docs/architecture.png` / `.md` | 架构图与逐节点说明 |
-| `docs/interview-script.md` | 面试稿（中英对照，含两个必答题） |
 | `docs/aws-deployment.md` | AWS 资源、调用命令、拆除 |
 | `docs/cost.md` | 每份报价成本、省钱杠杆 |
-| `docs/demo-script.md` | 录屏分镜 |
+| `docs/demo-script.final.md` | 录屏脚本（中英对照） |
+| `docs/transcript.md` | 实际录制的英文旁白全文 |
 | `docs/db-schema.xlsx` | 数据字典（10 表 / 93 字段，含来源） |

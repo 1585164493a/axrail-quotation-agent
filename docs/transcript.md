@@ -2,7 +2,7 @@
 
 > 这是录制时实际念的英文稿（27 句，约 553 词）。与 `docs/demo-script.final.md` 的差异：
 > 最后"三个改进"按加长版讲（每条一句）。
-> 用途：YouTube 字幕底稿、README 引用、或提交邮件里的说明。
+> 用途：视频描述、或 README 里引用旁白全文。
 
 For the brief, I built one path from a mixed-format RFQ to a delivered quote. Five layers: email into S3, Runtime runs agent dot py, Gateway exposes fourteen tools, the tools do the work, deliverables back to S3. Inside the tools, eight steps from ingest to render — and the model only reads text. Everything else is code.
 
